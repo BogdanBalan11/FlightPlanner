@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1004766163183",
+    "project_id": "flightplannermaster",
+    "storage_bucket": "flightplannermaster.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004766163183:android:7737c083697e6af9eaab1a",
+        "android_client_info": {
+          "package_name": "com.example.flightplanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB848iRyhVxgg-W7zlZVBbHeE6JhRXkVKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
