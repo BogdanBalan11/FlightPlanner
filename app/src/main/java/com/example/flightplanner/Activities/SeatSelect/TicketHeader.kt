@@ -19,10 +19,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.flightplanner.R
 
 @Composable
-fun TopSection(
-    modifier: Modifier,
-    onBackClick:() -> Unit
-){
+fun TicketDetailHeader(onBackClick:()->Unit, modifier: Modifier) {
     ConstraintLayout(modifier = modifier
         .fillMaxSize()
         .background(color = colorResource(R.color.darkPurple2))

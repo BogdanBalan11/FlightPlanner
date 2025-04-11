@@ -1,7 +1,12 @@
 package com.example.flightplanner.Activities.SeatSelect
 
+import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -12,6 +17,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.flightplanner.Activities.Domain.FlightModel
 import com.example.flightplanner.R
@@ -47,6 +54,11 @@ fun SeatListScreen(flight: FlightModel,
         totalPrice = seatCount * flight.Price
     }
 
+    fun updatePriceAndCount() {
+        seatCount = selectedSeatNames.size
+        totalPrice = seatCount * flight.Price
+    }
+
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
@@ -61,9 +73,93 @@ fun SeatListScreen(flight: FlightModel,
                     end.linkTo(parent.end)
                 }, onBackClick = onBackClick
         )
+        // middle section
+        ConstraintLayout(
+            modifier = Modifier
+                .padding(top=100.dp)
+                .constrainAs(middleSection) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+        ) {
+            val (airplane, seatGrid) = createRefs()
+            Image(
+                painter = painterResource(R.drawable.airple_seat),
+                contentDescription = null,
+                modifier = Modifier.constrainAs(airplane) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+            )
+
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(7),
+                modifier = Modifier
+                    .padding(top=240.dp)
+                    .padding(horizontal = 64.dp)
+                    .constrainAs(seatGrid) {
+                        top.linkTo(parent.top)
+                        start.linkTo(airplane.start)
+                        end.linkTo(airplane.end)
+                    }
+            ) {
+                  items(seatList.size) { index ->
+                      val seat = seatList[index]
+
+                      SeatItem(
+                          seat = seat,
+                          onSeatClick = {
+                              when(seat.status) {
+                                  SeatStatus.AVAILABLE -> {
+                                      seat.status = SeatStatus.SELECTED
+                                      selectedSeatNames.add(seat.name)
+                                  }
+
+                                  SeatStatus.SELECTED -> {
+                                      seat.status = SeatStatus.AVAILABLE
+                                      selectedSeatNames.remove(seat.name)
+                                  }
+
+                                  else ->{
+
+                                  }
+                              }
+                              updatePriceAndCount()
+
+                          }
+                      )
+                  }
+
+            }
+
+        }
+
+        BottomSection(
+            seatCount = seatCount,
+            selectedSeats = selectedSeatNames.joinToString(","),
+            totalPrice = totalPrice,
+            onConfirmClick = {
+                if (seatCount > 0){
+                    flight.Passenger = selectedSeatNames.joinToString(",")
+                    flight.Price = totalPrice
+                    onConfirm(flight)
+                } else{
+                    Toast.makeText(context, "Please select your seat", Toast.LENGTH_SHORT).show()
+                }
+            },
+            modifier = Modifier.constrainAs(bottomSection) {
+                bottom.linkTo(parent.bottom)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            }
+        )
+
     }
 
 }
+
 
 fun generateSeatList(flight: FlightModel): List<Seat> {
     val seatList = mutableListOf<Seat>()
