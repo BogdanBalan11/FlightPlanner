@@ -34,6 +34,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activities.Login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.Register.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

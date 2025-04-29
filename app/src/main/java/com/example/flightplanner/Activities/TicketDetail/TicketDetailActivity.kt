@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import com.example.flightplanner.Activities.Domain.FlightModel
 import com.example.flightplanner.Activities.SeatSelect.SeatListScreen
-import com.example.flightplanner.Activities.Splash.StatusTopBarColor
+//import com.example.flightplanner.Activities.Splash.StatusTopBarColor
 
 
 class TicketDetailActivity : AppCompatActivity() {
@@ -18,7 +18,7 @@ class TicketDetailActivity : AppCompatActivity() {
         var flight = intent.getSerializableExtra("flight") as FlightModel
 
         setContent {
-            StatusTopBarColor()
+//            StatusTopBarColor()
 
             TicketDetailScreen(
                 flight = flight,

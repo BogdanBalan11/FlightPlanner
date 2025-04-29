@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.flightplanner.Activities.Splash.StatusTopBarColor
+//import com.example.flightplanner.Activities.Splash.StatusTopBarColor
 import com.example.flightplanner.ViewModel.MainViewModel
 
 class SearchResultActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class SearchResultActivity : AppCompatActivity() {
         to = intent.getStringExtra("to")?:""
 
         setContent {
-            StatusTopBarColor()
+//            StatusTopBarColor()
 
             ItemListScreen(
                 from=from,

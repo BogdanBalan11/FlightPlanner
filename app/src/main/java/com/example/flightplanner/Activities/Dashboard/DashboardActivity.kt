@@ -33,10 +33,11 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.example.flightplanner.Activities.Domain.LocationModel
 import com.example.flightplanner.Activities.SearchResult.SearchResultActivity
 import com.example.flightplanner.Activities.Splash.GradientButton
-import com.example.flightplanner.Activities.Splash.StatusTopBarColor
+//import com.example.flightplanner.Activities.Splash.StatusTopBarColor
 import com.example.flightplanner.R
 import com.example.flightplanner.ViewModel.MainViewModel
 
@@ -70,7 +71,7 @@ fun MainScreen() {
     var childPassenger:String=""
     val context = LocalContext.current
 
-    StatusTopBarColor()
+//    StatusTopBarColor()
 
     LaunchedEffect(Unit) {
         viewModel.loadLocations().observeForever {

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -29,9 +30,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import coil.compose.rememberImagePainter
 import com.example.flightplanner.Activities.Dashboard.DashboardActivity
+import com.example.flightplanner.Activities.Login.LoginActivity
 import com.example.flightplanner.MainActivity
 import com.example.flightplanner.R
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -39,17 +43,16 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_splash)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            isAppearanceLightStatusBars = false
+            isAppearanceLightNavigationBars = false
+        }
         setContent {
             SplashScreen(onGetStartedClick = {
-                startActivity(Intent(this, DashboardActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
             })
         }
     }
@@ -58,9 +61,8 @@ class SplashActivity : AppCompatActivity() {
 @Composable
 @Preview
 fun SplashScreen(onGetStartedClick:()->Unit={}) {
-    StatusTopBarColor()
-    Column(modifier = Modifier.fillMaxSize()) {
-        ConstraintLayout(){
+
+        ConstraintLayout(modifier = Modifier.fillMaxSize()){
             val(backgroundImg, title, subtitle, startbtn) = createRefs()
             Image(
                 painter = painterResource(R.drawable.splash_bg),
@@ -115,18 +117,5 @@ fun SplashScreen(onGetStartedClick:()->Unit={}) {
             }
 
         }
-    }
-}
-
-@Composable
-fun StatusTopBarColor(){
-    val systemUiController = rememberSystemUiController()
-
-    SideEffect {
-        systemUiController.setStatusBarColor(
-            color = Color.Transparent,
-            darkIcons = false
-        )
-    }
 
 }
