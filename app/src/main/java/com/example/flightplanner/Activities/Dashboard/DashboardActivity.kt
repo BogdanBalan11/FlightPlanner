@@ -34,7 +34,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.example.flightplanner.Activities.Domain.LocationModel
+import com.example.flightplanner.Domain.LocationModel
 import com.example.flightplanner.Activities.SearchResult.SearchResultActivity
 import com.example.flightplanner.Activities.Splash.GradientButton
 //import com.example.flightplanner.Activities.Splash.StatusTopBarColor

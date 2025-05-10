@@ -24,40 +24,39 @@ import com.example.flightplanner.R
 @Composable
 @Preview
 fun GradientButton(
-    onClick: () -> Unit={},
-    text: String="Get Started",
+    onClick: () -> Unit = {},
+    text: String = "Get Started",
     padding: Int = 0
 ) {
-    Button(onClick=onClick,
+    Button(
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(padding.dp),
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
-        ) {
+    ) {
         Box(
             modifier = Modifier
-                .background(brush = Brush.linearGradient(
-                    colors = listOf(
-                        colorResource(R.color.purple),
-                        colorResource(R.color.pink)
-                    )
-                ) ,
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            colorResource(R.color.purple),
+                            colorResource(R.color.pink)
+                        )
+                    ),
                     shape = RoundedCornerShape(50.dp)
-
                 )
                 .fillMaxWidth()
                 .padding(vertical = 12.dp),
             contentAlignment = Alignment.Center
         ) {
-
             Text(
-                text=text,
+                text = text,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp
             )
-
         }
     }
 }

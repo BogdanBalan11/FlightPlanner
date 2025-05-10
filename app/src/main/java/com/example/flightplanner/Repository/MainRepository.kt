@@ -2,8 +2,8 @@ package com.example.flightplanner.Repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.flightplanner.Activities.Domain.FlightModel
-import com.example.flightplanner.Activities.Domain.LocationModel
+import com.example.flightplanner.Domain.FlightModel
+import com.example.flightplanner.Domain.LocationModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase

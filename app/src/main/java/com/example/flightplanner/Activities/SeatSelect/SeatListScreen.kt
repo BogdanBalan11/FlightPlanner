@@ -20,7 +20,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.flightplanner.Activities.Domain.FlightModel
+import com.example.flightplanner.Domain.FlightModel
 import com.example.flightplanner.R
 
 enum class SeatStatus {

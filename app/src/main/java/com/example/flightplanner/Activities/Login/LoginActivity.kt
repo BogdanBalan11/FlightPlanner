@@ -46,7 +46,7 @@ import com.example.flightplanner.Activities.Register.RegisterActivity
 import com.example.flightplanner.Activities.Register.showMessage
 import com.example.flightplanner.Activities.Splash.GradientButton
 import com.example.flightplanner.R
-import com.example.flightplanner.Repository.AuthViewModel
+import com.example.flightplanner.ViewModel.AuthViewModel
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

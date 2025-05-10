@@ -1,4 +1,4 @@
-package com.example.flightplanner.Activities.Domain
+package com.example.flightplanner.Domain
 
 data class UserModel(
     val userId: String? = "",

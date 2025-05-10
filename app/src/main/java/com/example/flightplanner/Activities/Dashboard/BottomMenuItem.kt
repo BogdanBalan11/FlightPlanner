@@ -27,7 +27,7 @@ data class BottomMenuItem(
 )
 
 @Composable
-fun prepareBottomMenu():List<BottomMenuItem>{
+fun prepareBottomMenu(): List<BottomMenuItem> {
     return listOf(
         BottomMenuItem(label = "Home", icon = painterResource(R.drawable.bottom_btn1)),
         BottomMenuItem(label = "Cart", icon = painterResource(R.drawable.bottom_btn2)),
@@ -47,17 +47,13 @@ fun MyBottomBar() {
     BottomAppBar(backgroundColor = colorResource(R.color.darkPurple), elevation = 3.dp) {
         bottomMenuItemsList.forEach { bottomMenuItem ->
             BottomNavigationItem(
-                selected = (selectedItem== bottomMenuItem.label),
+                selected = (selectedItem == bottomMenuItem.label),
                 onClick = {
                     selectedItem = bottomMenuItem.label
-                    if (bottomMenuItem.label == "Cart") {
-
-                    } else {
-                        Toast.makeText(context, bottomMenuItem.label, Toast.LENGTH_SHORT).show()
-                    }
-
+                    Toast.makeText(context, bottomMenuItem.label, Toast.LENGTH_SHORT).show()
                 }, icon = {
-                    Icon(painter = bottomMenuItem.icon,
+                    Icon(
+                        painter = bottomMenuItem.icon,
                         contentDescription = null,
                         tint = colorResource(R.color.orange),
                         modifier = Modifier
@@ -65,9 +61,7 @@ fun MyBottomBar() {
                             .size(20.dp)
                     )
                 }
-
             )
-
         }
     }
 }

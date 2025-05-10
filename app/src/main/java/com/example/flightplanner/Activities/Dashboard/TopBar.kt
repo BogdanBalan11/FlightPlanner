@@ -1,5 +1,6 @@
 package com.example.flightplanner.Activities.Dashboard
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -16,11 +18,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.flightplanner.Activities.Login.LoginActivity
+import com.example.flightplanner.Activities.SearchResult.SearchResultActivity
 import com.example.flightplanner.R
+import com.example.flightplanner.ViewModel.AuthViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 @Preview
-fun TopBar() {
+fun TopBar(
+    authViewModel: AuthViewModel = viewModel()
+) {
+    val currentUser = FirebaseAuth.getInstance().currentUser
+
     ConstraintLayout(
         modifier = Modifier
         .padding(horizontal = 32.dp)
@@ -52,19 +64,24 @@ fun TopBar() {
                 }
         )
 //
+        val context = LocalContext.current
         Image(
-            painter = painterResource(R.drawable.bell_icon),
+            painter = painterResource(R.drawable.back),
             contentDescription = null,
             modifier = Modifier
                 .constrainAs(notification) {
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                     end.linkTo(parent.end)
+                }.clickable {
+                    // Call your logout method here
+                    authViewModel.logout()
+                    startActivity(context, Intent(context, LoginActivity::class.java), null)
                 }
         )
 //
         Text(
-            text = "Alex Johnson",
+            text = currentUser?.email ?: "",
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,

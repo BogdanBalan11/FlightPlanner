@@ -1,8 +1,8 @@
 package com.example.flightplanner.ViewModel
 
 import androidx.lifecycle.LiveData
-import com.example.flightplanner.Activities.Domain.FlightModel
-import com.example.flightplanner.Activities.Domain.LocationModel
+import com.example.flightplanner.Domain.FlightModel
+import com.example.flightplanner.Domain.LocationModel
 import com.example.flightplanner.Repository.MainRepository
 
 class MainViewModel {

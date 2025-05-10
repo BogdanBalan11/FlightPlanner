@@ -2,7 +2,7 @@ package com.example.flightplanner.Repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.flightplanner.Activities.Domain.UserModel
+import com.example.flightplanner.Domain.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 

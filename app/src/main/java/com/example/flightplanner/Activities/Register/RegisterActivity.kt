@@ -46,7 +46,7 @@ import com.example.flightplanner.Activities.Dashboard.DashboardActivity
 import com.example.flightplanner.Activities.Login.LoginActivity
 import com.example.flightplanner.Activities.Splash.GradientButton
 import com.example.flightplanner.R
-import com.example.flightplanner.Repository.AuthViewModel
+import com.example.flightplanner.ViewModel.AuthViewModel
 
 
 class RegisterActivity : ComponentActivity() {

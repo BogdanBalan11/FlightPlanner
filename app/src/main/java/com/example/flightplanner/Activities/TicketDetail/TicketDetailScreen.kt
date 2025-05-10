@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.flightplanner.Activities.Domain.FlightModel
+import com.example.flightplanner.Domain.FlightModel
 import com.example.flightplanner.Activities.SeatSelect.TicketDetailHeader
 import com.example.flightplanner.Activities.Splash.GradientButton
 import com.example.flightplanner.R

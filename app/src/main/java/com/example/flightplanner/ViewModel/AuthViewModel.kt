@@ -1,7 +1,8 @@
-package com.example.flightplanner.Repository
+package com.example.flightplanner.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.example.flightplanner.Repository.AuthRepository
 
 class AuthViewModel : ViewModel() {
     private val authRepository = AuthRepository()
