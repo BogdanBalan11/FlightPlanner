@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.android) version "2.1.0"
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -40,9 +41,6 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -65,6 +63,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,7 +75,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
     implementation("io.coil-kt:coil-compose:2.2.2")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
     implementation("com.google.accompanist:accompanist-pager:0.28.0")
@@ -84,4 +86,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0")
     implementation("androidx.compose.foundation:foundation:1.7.6")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.36.0")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
+
 }

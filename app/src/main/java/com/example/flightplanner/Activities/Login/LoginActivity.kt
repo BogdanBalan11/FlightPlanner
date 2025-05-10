@@ -20,9 +20,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,10 +40,13 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightplanner.Activities.Dashboard.DashboardActivity
 import com.example.flightplanner.Activities.Register.RegisterActivity
+import com.example.flightplanner.Activities.Register.showMessage
 import com.example.flightplanner.Activities.Splash.GradientButton
 import com.example.flightplanner.R
+import com.example.flightplanner.Repository.AuthViewModel
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,12 +64,10 @@ class LoginActivity : ComponentActivity() {
         setContent {
             LoginScreen(
                 onLoginClick = {
-
                     startActivity(Intent(this, DashboardActivity::class.java))
                     finish()
                 },
                 onRegisterClick = {
-
                     startActivity(Intent(this, RegisterActivity::class.java))
                 }
             )
@@ -72,8 +80,29 @@ class LoginActivity : ComponentActivity() {
 @Preview
 fun LoginScreen(
     onLoginClick: () -> Unit = {},
-    onRegisterClick: () -> Unit = {}
+    onRegisterClick: () -> Unit = {},
+    authViewModel: AuthViewModel = viewModel()
 ) {
+    val loginSuccess by authViewModel.loginSuccess.observeAsState()
+    val context = LocalContext.current
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    LaunchedEffect(loginSuccess) {
+        when (loginSuccess) {
+            true -> {
+                onLoginClick()
+                authViewModel.resetLoginStatus()
+            }
+
+            false -> {
+                showMessage(context, "Login failed!")
+            }
+
+            else -> {}
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -107,10 +136,10 @@ fun LoginScreen(
                     }
             )
 
-
+// Email Field
             TextField(
-                value = "",
-                onValueChange = {},
+                value = email,
+                onValueChange = { email = it },
                 placeholder = { Text(text = "Email") },
                 singleLine = true,
                 colors = TextFieldDefaults.textFieldColors(
@@ -127,9 +156,10 @@ fun LoginScreen(
                     .fillMaxWidth()
             )
 
+            // Password Field
             TextField(
-                value = "",
-                onValueChange = {},
+                value = password,
+                onValueChange = { password = it },
                 placeholder = { Text(text = "Password") },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
@@ -152,7 +182,9 @@ fun LoginScreen(
                 start.linkTo(parent.start)
                 end.linkTo(parent.end)
             }) {
-                GradientButton(onClick = onLoginClick, "Login", 0)
+                GradientButton(onClick = {
+                    authViewModel.login(email, password)
+                }, "Login", 0)
             }
 
             Row(
