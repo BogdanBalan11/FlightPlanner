@@ -169,7 +169,7 @@ fun MainScreen() {
                         showLocationLoading=showLocationLoading
                     ) {
                             selectedItem ->
-                        to = selectedItem
+                        classes = selectedItem
                     }
 
                     // Search Button

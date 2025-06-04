@@ -9,7 +9,7 @@ class MainViewModel {
     private val repository = MainRepository()
 
     fun loadLocations(): LiveData<MutableList<LocationModel>> {
-        return repository.loadLocation()
+        return repository.loadLocation2()
     }
 
     fun loadFiltered(from: String, to: String):
