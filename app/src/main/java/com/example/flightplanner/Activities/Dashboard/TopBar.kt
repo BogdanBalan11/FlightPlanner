@@ -1,5 +1,6 @@
 package com.example.flightplanner.Activities.Dashboard
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -21,17 +22,16 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.flightplanner.Activities.Login.LoginActivity
-import com.example.flightplanner.Activities.SearchResult.SearchResultActivity
 import com.example.flightplanner.R
 import com.example.flightplanner.ViewModel.AuthViewModel
-import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 @Preview
 fun TopBar(
     authViewModel: AuthViewModel = viewModel()
 ) {
-    val currentUser = FirebaseAuth.getInstance().currentUser
+    val prefs = LocalContext.current.getSharedPreferences("my_app_prefs", Context.MODE_PRIVATE)
+    val savedEmail = prefs.getString("saved_email", "")
 
     ConstraintLayout(
         modifier = Modifier
@@ -75,13 +75,15 @@ fun TopBar(
                     end.linkTo(parent.end)
                 }.clickable {
                     // Call your logout method here
+                    val prefs = context.getSharedPreferences("my_app_prefs", Context.MODE_PRIVATE)
+                    prefs.edit().remove("saved_email").apply()
                     authViewModel.logout()
                     startActivity(context, Intent(context, LoginActivity::class.java), null)
                 }
         )
 //
         Text(
-            text = currentUser?.email ?: "",
+            text = savedEmail!!,
             color = Color.White,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp,

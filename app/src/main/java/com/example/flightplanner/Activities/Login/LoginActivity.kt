@@ -1,5 +1,6 @@
 package com.example.flightplanner.Activities.Login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -52,6 +53,14 @@ class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val prefs = getSharedPreferences("my_app_prefs", Context.MODE_PRIVATE)
+        val savedEmail = prefs.getString("saved_email", null)
+        if (!savedEmail.isNullOrEmpty()) {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+            return
+        }
+
         // Enable edge-to-edge drawing
         WindowCompat.setDecorFitsSystemWindows(window, false)
         enableEdgeToEdge()
@@ -91,12 +100,18 @@ fun LoginScreen(
     LaunchedEffect(loginSuccess) {
         when (loginSuccess) {
             true -> {
+                val prefs = context.getSharedPreferences("my_app_prefs", Context.MODE_PRIVATE)
+                prefs.edit()
+                    .putString("saved_email", email.trim())
+                    .apply()
+
                 onLoginClick()
                 authViewModel.resetLoginStatus()
             }
 
             false -> {
                 showMessage(context, "Login failed!")
+                authViewModel.resetLoginStatus()
             }
 
             else -> {}

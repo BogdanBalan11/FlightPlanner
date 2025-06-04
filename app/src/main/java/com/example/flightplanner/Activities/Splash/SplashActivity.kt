@@ -1,5 +1,6 @@
 package com.example.flightplanner.Activities.Splash
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -27,12 +28,20 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.example.flightplanner.Activities.Dashboard.DashboardActivity
 import com.example.flightplanner.Activities.Login.LoginActivity
 import com.example.flightplanner.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val prefs = getSharedPreferences("my_app_prefs", Context.MODE_PRIVATE)
+        val savedEmail = prefs.getString("saved_email", null)
+        if (!savedEmail.isNullOrEmpty()) {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            finish()
+            return
+        }
         WindowCompat.setDecorFitsSystemWindows(window, false)
         enableEdgeToEdge()
 
