@@ -9,11 +9,11 @@ class MainViewModel {
     private val repository = MainRepository()
 
     fun loadLocations(): LiveData<MutableList<LocationModel>> {
-        return repository.loadLocation2()
+        return repository.loadLocations()
     }
 
-    fun loadFiltered(from: String, to: String):
+    fun loadFilteredFlights(from: String, to: String):
             LiveData<MutableList<FlightModel>> {
-        return repository.loadFiltered(from, to)
+        return repository.loadFilteredFlights(from, to)
     }
 }

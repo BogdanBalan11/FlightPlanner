@@ -30,7 +30,7 @@ class MainRepository {
     private val client = OkHttpClient()
     private val gson = Gson()
 
-    fun loadLocation2(): LiveData<MutableList<LocationModel>> {
+    fun loadLocations(): LiveData<MutableList<LocationModel>> {
         val listData = MutableLiveData<MutableList<LocationModel>>()
         val url = "${BASE_URL}Locations.json"
 
@@ -71,28 +71,8 @@ class MainRepository {
     }
 
 
-    fun loadLocation(): LiveData<MutableList<LocationModel>> {
-        val listData = MutableLiveData<MutableList<LocationModel>>()
-        val ref = firebaseDatabase.getReference("Locations")
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val list = mutableListOf<LocationModel>()
-                for (childSnapshot in snapshot.children) {
-                    val item = childSnapshot.getValue(LocationModel::class.java)
-                    item?.let { list.add(it) }
-                }
-                listData.value = list
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-        return listData
-    }
-
-    fun loadFiltered(from: String, to: String): LiveData<MutableList<FlightModel>> {
+    fun loadFilteredFlights(from: String, to: String): LiveData<MutableList<FlightModel>> {
         val listData = MutableLiveData<MutableList<FlightModel>>()
         val ref = firebaseDatabase.getReference("Flights")
         val query: Query = ref.orderByChild("from").equalTo(from)

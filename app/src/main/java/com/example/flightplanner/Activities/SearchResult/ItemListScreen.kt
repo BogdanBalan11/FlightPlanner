@@ -38,11 +38,11 @@ fun ItemListScreen(
     viewModel: MainViewModel,
     onBackClick: () -> Unit
 ) {
-    val items by viewModel.loadFiltered(from,to).observeAsState(emptyList())
+    val items by viewModel.loadFilteredFlights(from,to).observeAsState(emptyList())
     var isLoading by remember { mutableStateOf(true) }
 
     LaunchedEffect(from, to) {
-        viewModel.loadFiltered(from, to)
+        viewModel.loadFilteredFlights(from, to)
     }
 
     LaunchedEffect(items) {
