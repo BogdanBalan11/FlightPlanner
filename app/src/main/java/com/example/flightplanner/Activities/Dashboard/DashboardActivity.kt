@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Scaffold
@@ -33,11 +34,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.WindowInsetsControllerCompat
 import com.example.flightplanner.Domain.LocationModel
 import com.example.flightplanner.Activities.SearchResult.SearchResultActivity
 import com.example.flightplanner.Activities.Splash.GradientButton
-//import com.example.flightplanner.Activities.Splash.StatusTopBarColor
 import com.example.flightplanner.R
 import com.example.flightplanner.ViewModel.MainViewModel
 
@@ -140,7 +139,7 @@ fun MainScreen() {
                             modifier = Modifier.weight(1f),
                             onItemSelected = {adultPassenger=it}
                         )
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.width(16.dp))
                         PassengerCounter(
                             title = "Child",
                             modifier = Modifier.weight(1f),

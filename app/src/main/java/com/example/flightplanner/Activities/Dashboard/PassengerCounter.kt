@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,6 +36,20 @@ fun PassengerCounter(
     onItemSelected: (String) -> Unit
 ) {
     var passengerCount by remember { mutableStateOf(1) }
+
+    val passengers = if(title == "Adult") {
+        if(passengerCount > 1) {
+            "$passengerCount ${title}s"
+        } else {
+            "$passengerCount $title"
+        }
+    } else {
+        if(passengerCount > 1) {
+            "$passengerCount ${title}ren"
+        } else {
+            "$passengerCount $title"
+        }
+    }
 
     Box(
         modifier = modifier
@@ -83,7 +97,7 @@ fun PassengerCounter(
 
             // passenger count
             Text(
-                text = "$passengerCount $title",
+                text = passengers,
                 color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 fontSize = 14.sp,
