@@ -12,7 +12,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -22,26 +24,33 @@ import com.example.flightplanner.R
 
 @Composable
 fun BottomSection(
-    seatCount:Int,
+    seatCount: Int,
     selectedSeats: String,
     totalPrice: Double,
-    onConfirmClick:()-> Unit,
+    onConfirmClick: () -> Unit,
     modifier: Modifier
-){
+) {
     Column(
-        modifier=modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(160.dp)
             .background(colorResource(R.color.darkPurple))
             .padding(vertical = 16.dp)
-    ){
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            LegendItem(text="Available",color=colorResource(R.color.green))
-            LegendItem(text="Selected",color=colorResource(R.color.orange))
-            LegendItem(text="Unavailable",color=colorResource(R.color.grey))
+            LegendItem(
+                text = "Available", color = Brush.linearGradient(
+                    colors = listOf(
+                        colorResource(R.color.purple),
+                        colorResource(R.color.pink)
+                    )
+                )
+            )
+            LegendItem(text = "Selected", color = SolidColor(colorResource(R.color.orange)))
+            LegendItem(text = "Unavailable", color = SolidColor(colorResource(R.color.grey)))
         }
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -51,7 +60,7 @@ fun BottomSection(
                 .padding(horizontal = 32.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
-        ){
+        ) {
             Column {
                 Text(
                     text = "$seatCount Seat Selected",
@@ -60,14 +69,14 @@ fun BottomSection(
                     fontSize = 14.sp
                 )
                 Text(
-                    text = if(selectedSeats.isBlank())"-" else selectedSeats,
+                    text = if (selectedSeats.isBlank()) "-" else selectedSeats,
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp
                 )
             }
             Text(
-                text = "$${String.format("%.0f",totalPrice)}",
+                text = "$${String.format("%.0f", totalPrice)}",
                 color = colorResource(R.color.orange),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 25.sp
