@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.flightplanner.R
 import com.example.flightplanner.ViewModel.MainViewModel
 
@@ -35,7 +36,7 @@ import com.example.flightplanner.ViewModel.MainViewModel
 fun ItemListScreen(
     from: String,
     to: String,
-    viewModel: MainViewModel,
+    viewModel: MainViewModel = hiltViewModel(),
     onBackClick: () -> Unit
 ) {
     val items by viewModel.loadFilteredFlights(from,to).observeAsState(emptyList())
