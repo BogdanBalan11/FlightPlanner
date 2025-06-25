@@ -8,12 +8,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -63,6 +63,7 @@ fun SeatListScreen(flight: FlightModel,
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(R.color.darkPurple2))
+            .padding(bottom = 15.dp)
     ) {
         val (topSection, middleSection, bottomSection) = createRefs()
         TopSection(
@@ -76,7 +77,7 @@ fun SeatListScreen(flight: FlightModel,
         // middle section
         ConstraintLayout(
             modifier = Modifier
-                .padding(top=100.dp)
+                .padding(top=80.dp)
                 .constrainAs(middleSection) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -87,7 +88,9 @@ fun SeatListScreen(flight: FlightModel,
             Image(
                 painter = painterResource(R.drawable.airple_seat),
                 contentDescription = null,
-                modifier = Modifier.constrainAs(airplane) {
+                modifier = Modifier.
+                padding(top = 20.dp)
+                    .constrainAs(airplane) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -97,7 +100,7 @@ fun SeatListScreen(flight: FlightModel,
             LazyVerticalGrid(
                 columns = GridCells.Fixed(7),
                 modifier = Modifier
-                    .padding(top=240.dp)
+                    .padding(top=230.dp)
                     .padding(horizontal = 64.dp)
                     .constrainAs(seatGrid) {
                         top.linkTo(parent.top)

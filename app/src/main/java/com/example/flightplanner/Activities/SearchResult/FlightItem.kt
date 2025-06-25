@@ -115,7 +115,7 @@ fun FlightItem(item: FlightModel, index: Int){
             painter = painterResource(R.drawable.seat_black_ic),
             contentDescription = null,
             modifier = Modifier
-                .padding(top=8.dp)
+                .padding(8.dp)
                 .constrainAs(seatIcon) {
                     start.linkTo(parent.start)
                     top.linkTo(dashLine.bottom)

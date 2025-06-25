@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -63,7 +64,6 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
     var childPassenger:String=""
     val context = LocalContext.current
 
-//    StatusTopBarColor()
 
     val didRun = remember { mutableStateOf(false) }
 
@@ -76,17 +76,10 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
         }
     }
 
-    Scaffold(
-        bottomBar = {MyBottomBar()},
-//        modifier = Modifier
-//            .windowInsetsPadding(WindowInsets.systemBars),
-    ) {
-        paddingValues ->
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .background(color = colorResource(R.color.darkPurple2))
-                .padding(paddingValues = paddingValues)
 
         ) {
             item{TopBar()}
@@ -133,7 +126,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                     // passenger counter
                     Spacer(modifier = Modifier.height(16.dp))
                     YellowTitle("Passengers")
-                    Row(modifier = Modifier.fillMaxWidth()) {
+                    Row() {
                         PassengerCounter(
                           title = "Adult",
                             modifier = Modifier.weight(1f),
@@ -188,8 +181,6 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
                 }
             }
         }
-    }
-
 }
 
 @Composable

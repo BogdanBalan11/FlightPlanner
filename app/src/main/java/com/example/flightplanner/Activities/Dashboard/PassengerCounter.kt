@@ -72,7 +72,7 @@ fun PassengerCounter(
                 contentDescription = null,
                 modifier = Modifier.size(24.dp)
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(4.dp))
 
             // minus button
             Box(
@@ -90,7 +90,7 @@ fun PassengerCounter(
                 Text(
                     text = "-",
                     color = Color.Black,
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -118,7 +118,7 @@ fun PassengerCounter(
                 Text(
                     text = "+",
                     color = Color.Black,
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
                 )
             }
