@@ -31,9 +31,11 @@ enum class SeatStatus {
 }
 
 data class Seat(
-    var status: SeatStatus,
-    var name: String
-)
+    var name: String,
+    var initialStatus: SeatStatus
+) {
+    var status by mutableStateOf(initialStatus)
+}
 
 @Composable
 fun SeatListScreen(flight: FlightModel,
@@ -116,8 +118,12 @@ fun SeatListScreen(flight: FlightModel,
                           onSeatClick = {
                               when(seat.status) {
                                   SeatStatus.AVAILABLE -> {
-                                      seat.status = SeatStatus.SELECTED
-                                      selectedSeatNames.add(seat.name)
+                                      if(selectedSeatNames.size >= 5) {
+                                          Toast.makeText(context, "The order is limited to 5 tickets", Toast.LENGTH_SHORT).show()
+                                      } else {
+                                          seat.status = SeatStatus.SELECTED
+                                          selectedSeatNames.add(seat.name)
+                                      }
                                   }
 
                                   SeatStatus.SELECTED -> {
@@ -182,7 +188,7 @@ fun generateSeatList(flight: FlightModel): List<Seat> {
             row++
         }
         if (i % 7 == 3) {
-            seatList.add(Seat(SeatStatus.EMPTY, row.toString()))
+            seatList.add(Seat(row.toString(), SeatStatus.EMPTY))
         } else{
             val seatName = seatAlphabetMap[i%7]+row
             val seatStatus = if (flight.ReservedSeats.contains(seatName)) {
@@ -190,7 +196,7 @@ fun generateSeatList(flight: FlightModel): List<Seat> {
             } else{
                 SeatStatus.AVAILABLE
             }
-            seatList.add(Seat(seatStatus, seatName))
+            seatList.add(Seat(seatName, seatStatus))
         }
     }
     return seatList
